@@ -6,13 +6,13 @@
 </head>
 <body>
     이벤트 투게더에 오신 것을 환영합니다!<br>
+    <ul>
     {% if events_list %}
-        <ul>
-        {% for event in events_list %}
-            <li><a href="/events/{{ event.eid }}">{{ event.ename }}</a></li>
+        {% for event in events_list%}
+        <li><a href="/events/{{ event.eid }}">{{ event.ename }}</a></li>
         {% endfor %}
-        </ul>
     {% endif %}
+    </ul>
     <a href="/events/new/">새 이벤트 만들기</a>
 </body>
 </html>

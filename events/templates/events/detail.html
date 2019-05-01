@@ -6,10 +6,11 @@
 </head>
 <body>
     이벤트 상세보기<br>
-    이벤트 id : {{ events.eid }}<br>
-    이벤트명 : {{ events.ename }}<br>
-    이벤트주최자 : {{ events.ecreater }}<br>
+    이벤트 id : {{ event.eid }}<br>
+    이벤트명 : {{ event.ename }}<br>
+    이벤트주최자 : {{ event.ecreater }}<br>
     <a href="/events/">목록으로</a><br>
-    <a href="/events/{{ events.eid }}/update/">이벤트 수정하기</a>
+    <a href="/events/{{ event.eid }}/update/">이벤트 수정하기</a>
+    <a href="/events/{{ event.eid }}/delete/">이벤트 삭제하기</a>
 </body>
 </html>

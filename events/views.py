@@ -1,37 +1,33 @@
-from django.shortcuts import render, redirect, reverse
-from django.views.generic import View, ListView, DetailView, RedirectView, TemplateView
+from django.shortcuts import render, get_object_or_404, HttpResponseRedirect, reverse
 from .models import Events
 
 
-class IndexView(ListView):
-    template_name = 'events/index.html'
-    context_object_name = 'events_list'
+# 함수형 뷰
+def index(request):
+    events_list = Events.objects.all()
+    return render(request, 'events/index.html', {'events_list':events_list})
 
-    def get_queryset(self):
-        return Events.objects.all()
+def detail(request, eid):
+    event = get_object_or_404(Events, pk=eid)
+    return render(request, 'events/detail.html', {'event':event})
 
+def new(request):
+    if request.method == 'POST':
+        event = Events(request.POST)
+        print(request.POST['ename'])
+    return render(request, 'events/write.html', {})
 
-class DetailView(DetailView):
-    model = Events
-    template_name = 'events/detail.html'
+def update(request, eid):
+    print()
 
-'''
-class WriteView(View):
-    def get(self, request):
-        template_name = 'events/write.html'
-        #return reverse(request, 'events/write.html')
-
-    def post(self, request):
-        return ''
-'''
-
-'''
-class WriteView(TemplateView):
-    template_name = 'events/write.html'
-'''
-
-
-class WriteView(View):
-    def get(self, request):
-        return render(request, '/events/write.html')
-
+def delete(request, eid):
+    try:
+        event = Events.objects.get(pk=eid)
+    except(KeyError, Events.DoesNotExist):
+        return render(request, 'events/detail.html', {
+            'event': event,
+            'error_message': 'delete failed'
+        })
+    else:
+        event.delete()
+    return HttpResponseRedirect(reverse('events:index'))
