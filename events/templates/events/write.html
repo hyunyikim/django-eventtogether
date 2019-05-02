@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>이벤트 작성</title>
+</head>
+<body>
+    이벤트 작성하기<br>
+    {{ error_mesage }}
+    <form name="eventForm" action="" method="post">
+        {% csrf_token %}
+        <input type="hidden" id="eid" name="eid" value="{{ event.eid }}">
+        <label>이벤트명</label><input type="text" name="ename" value="{{ event.ename }}"><br>
+        <label>이벤트 설명</label><textarea name="econtent">{{ event.econtent }}</textarea><br>
+        <label>주최자</label><input type="text" name="ecreater" value="{{ event.ecreater }}"><br>
+        <label>위치</label><input type="text" name="eloc" value="{{ event.eloc }}"><br>
+        <label>가격</label><input type="text" name="eprice" value="{{ event.eprice }}"><br>
+        <label>최대 참가 가능수</label><input type="text" name="emaxattendee" value="{{ event.emaxattendee }}"><br>
+        <input type="submit" value="이벤트 만들기">
+    </form>
+    <script type="text/javascript">
+        var eid = document.getElementById('eid').value;
+        if(!eid) {
+            document.eventForm.action = '/events/new/';
+        } else {
+            document.eventForm.action = '/events/'+ eid +'/update/'
+        }
+    </script>
+</body>
+</html>

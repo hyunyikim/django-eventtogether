@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>이벤트투게더 홈</title>
+</head>
+<body>
+    이벤트투게더 홈입니다. <br>
+    {% for key, value in verbose_dict.items %}
+        <a href="{% url key|add:':index' %}">{{ value }}으로 가기</a>
+    {% endfor %}
+</body>
+</html>
