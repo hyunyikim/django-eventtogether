@@ -5,6 +5,7 @@ from .models import Events
 # 함수형 뷰
 def index(request):
     events_list = Events.objects.all()
+    print('이벤트 리스트 : ', events_list)
     return render(request, 'events/index.html', {'events_list':events_list})
 
 def detail(request, eid):
