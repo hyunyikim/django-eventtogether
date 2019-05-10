@@ -36,7 +36,18 @@ class WriteView(generic.View):
 
 
 class DeleteView(generic.View):
-    print()
+    def get(self, request, *args, **kwars):
+        print('delete get function')
+        eid = self.kwargs.get("pk")
+        try:
+            event = Events.objects.get(eid=eid)
+            event.delete()
+            return HttpResponseRedirect(reverse('events:index'))
+        except(KeyError, Events.DoesNotExist):
+            return render(request, 'events/detail.html', {
+                'event':event,
+                'error_message':'delete failed'
+            })
 
 
 class UpdateView(generic.View):
