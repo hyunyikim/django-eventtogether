@@ -1,13 +1,44 @@
 <!DOCTYPE html>
+{% load staticfiles %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>이벤트투게더 홈</title>
+    <title>{% block title %}Event Together{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/bootstrap-reboot.css' %}" />
 </head>
 <body>
-    이벤트투게더 홈입니다. <br>
-    {% for key, value in verbose_dict.items %}
-        <a href="{% url key|add:':index' %}">{{ value }}으로 가기</a>
-    {% endfor %}
+    {% block navbar %}
+    <div class="container">
+        <header class="blog-header py-3">
+            <div class="row flex-nowrap justify-content-between align-items-center">
+              <div class="col-4 pt-1">
+                <a class="text-muted" href="/events/new/">이벤트 주최하기</a>
+              </div>
+              <div class="col-4 text-center">
+                <a class="blog-header-logo text-dark" href="/">Event Together</a>
+              </div>
+              <div class="col-4 d-flex justify-content-end align-items-center">
+                <a class="btn btn-sm btn-outline-secondary" href="#">가입 혹은 로그인</a>
+              </div>
+            </div>
+        </header>
+    </div>
+    {% endblock navbar %}
+
+    {% block content %}
+    {% endblock content %}
+
+    {% block footer %}{% endblock footer %}
+
+
+
+
+            {% for key, value in verbose_dict.items %}
+            <a href="{% url key|add:':index' %}">{{ value }}으로 가기</a>
+            {% endfor %}
+
+
+
 </body>
 </html>

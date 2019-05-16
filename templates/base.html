@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'bootstrap.css' %}" />
+    <meta charset="UTF-8">
+    <title>{% block title %}Event Together{% endblock %}</title>
+</head>
+<body>
+    <div id="sidebar">
+        {% block navbar %}
+        <ul>
+            <li><a href="/">Project Home</a></li>
+            <li><a href="/admin/">Admin</a></li>
+        </ul>
+        {% endblock navbar %}
+        <br>
+    </div>
+    <div id="content">
+        {% block content %}{% endblock content %}
+    </div>
+
+    {% block footer %}{% endblock footer %}
+</body>
+</html>

@@ -1,18 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>이벤트 투게더</title>
-</head>
-<body>
-    이벤트 투게더에 오신 것을 환영합니다!<br>
-    <ul>
-    {% if events_list %}
-        {% for event in events_list%}
-        <li><a href="/events/{{ event.eid }}">{{ event.ename }}</a></li>
-        {% endfor %}
-    {% endif %}
-    </ul>
-    <a href="/events/new/">새 이벤트 만들기</a>
+{% extends "home.html" %}
+{% load staticfiles %}
+<title>{% block title %}이벤트 투게더{% endblock title %}</title>
+    {% block navbar %}
+        {{ block.super }}
+    {% endblock navbar %}
+    {% block content %}
+        <main role="main">
+            <section class="jumbotron text-center">
+                <div class="container">
+                    <h1 class="jumbotron-heading">Event Together</h1>
+                    <p class="lead text-muted"><b>이벤트 투게더와 함께 더욱 쉽고 빠르게 사람들을 만나세요!</b></p>
+                    <p>
+                        <a href="/events/new/" class="btn btn-primary my-2">이벤트 주최하기</a>
+                        <a href="#" class="btn btn-secondary my-2">이벤트 둘러보기</a>
+                    </p>
+                </div>
+            </section>
+            <div class="album py-5 bg-light">
+                <div class="container">
+                    <div class="row">
+                        {% if events_list %}
+                            {% for event in events_list%}
+                                <div class="col-md-4">
+                                    <div class="card mb-4 shadow-sm">
+                                        <a href="/events/{{ event.eid }}"><img src="{% static 'img/dog2.jpg' %}" class="bd-placeholder-img card-img-top" width="100%" height="225"></a>
+                                        <div class="card-body">
+                                            <h4>{{ event.ename }}</h4>
+                                            <p class="card-text">{{ event.econtent }}</p>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <small class="text-muted">&#8361; {{ event.eprice }}</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        {% endfor %}
+                    {% endif %}
+                    </div>
+                </div>
+            </div>
+        </main>
+    {% endblock content %}
 </body>
 </html>
+
+
+
