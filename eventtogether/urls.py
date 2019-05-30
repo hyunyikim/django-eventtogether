@@ -27,6 +27,4 @@ urlpatterns = [
 
     url(r'^accounts/', include('allauth.urls')),        # <- 추가
 
-    #path('auth/', include('social_django.urls', namespace='social')),
-
 ]

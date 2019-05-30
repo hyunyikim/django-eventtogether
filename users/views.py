@@ -7,7 +7,6 @@ class SignInView(generic.View):
     template_name = 'users/signin.html'
 
     def get(self, request):
-        print('signinview 함수 진입')
         return render(request, self.template_name, {'error_message': 'hello, this is error_message'})
 
     def post(self, request):
