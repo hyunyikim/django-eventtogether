@@ -40,15 +40,5 @@
             </ul>
           </footer>
     {% endblock footer %}
-
-
-
-
-            {% for key, value in verbose_dict.items %}
-            <a href="{% url key|add:':index' %}">{{ value }}으로 가기</a>
-            {% endfor %}
-
-
-
 </body>
 </html>

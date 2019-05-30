@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+import json
+
+from django.core.exceptions import ImproperlyConfigured
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -29,7 +32,6 @@ ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -37,7 +39,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites', # <- 의존성 앱
+
+    'allauth',  # <- 추가
+    'allauth.account',  # <- 추가
+    'allauth.socialaccount',  # <- 추가
+    'allauth.socialaccount.providers.google',
+
     'events.apps.EventsConfig',
+    'users.apps.UsersConfig',
 ]
 
 MIDDLEWARE = [
@@ -48,6 +58,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'eventtogether.urls'
@@ -63,6 +74,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',            # 소셜 로그인과 관련된 템플릿 옵션 추가
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -103,6 +116,20 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '310244175943-jkoaldef3qtnvienqlnitlkj8tqgoe9m.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'RHNZEzA2La98L0O3Edn45apo'
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',  # <- 디폴트 모델 백엔드,소셜 로그인 정보를 User 모델 클래스에 저장
+    'allauth.account.auth_backends.AuthenticationBackend', # <- 추가
+)
+
+SITE_ID = 1 # 사이트 아이디 기본값
+
+ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = True
+LOGIN_REDIRECT_URL = "/"
+ACCOUNT_AUTHENTICATED_LOGOUT_REDIRECTS = True
+ACCOUNT_LOGOUT_REDIRECT_URL = "/"
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
