@@ -25,6 +25,6 @@ urlpatterns = [
     path('events/', include('events.urls')),
     path('users/', include('users.urls')),
 
-    url(r'^accounts/', include('allauth.urls')),        # <- 추가
+
 
 ]

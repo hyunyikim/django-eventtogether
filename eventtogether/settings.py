@@ -116,20 +116,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '310244175943-jkoaldef3qtnvienqlnitlkj8tqgoe9m.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'RHNZEzA2La98L0O3Edn45apo'
-
-AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.ModelBackend',  # <- 디폴트 모델 백엔드,소셜 로그인 정보를 User 모델 클래스에 저장
-    'allauth.account.auth_backends.AuthenticationBackend', # <- 추가
-)
-
-SITE_ID = 1 # 사이트 아이디 기본값
-
-ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = True
-LOGIN_REDIRECT_URL = "/"
-ACCOUNT_AUTHENTICATED_LOGOUT_REDIRECTS = True
-ACCOUNT_LOGOUT_REDIRECT_URL = "/"
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/

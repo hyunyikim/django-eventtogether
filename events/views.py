@@ -26,6 +26,8 @@ class WriteView(generic.View):
             event.ename = request.POST['ename']
             event.econtent = request.POST['econtent']
             event.ecreater = request.POST['ecreater']
+            event.estartdt = request.POST.get('estartdt')
+            event.eenddt = request.POST.get('eenddt')
             event.eloc = request.POST['eloc']
             event.eprice = request.POST['eprice']
             event.emaxattendee = request.POST['emaxattendee']

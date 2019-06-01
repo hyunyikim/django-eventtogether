@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" />
     <link rel="stylesheet" href="{% static 'css/bootstrap-reboot.css' %}" />
     <link rel="stylesheet" href="{% static 'css/event.css' %}" />
+
+    <link rel="stylesheet" href="{% static 'css/picker.css' %}" />
 </head>
 <body>
     {% block navbar %}
@@ -20,7 +22,7 @@
                 <a class="blog-header-logo text-dark" href="/">Event Together</a>
               </div>
               <div class="col-4 d-flex justify-content-end align-items-center">
-                <a class="btn btn-sm btn-outline-secondary" href="#">가입 혹은 로그인</a>
+                <a class="btn btn-sm btn-outline-secondary" href="/users/signin/">가입 혹은 로그인</a>
               </div>
             </div>
         </header>
@@ -40,5 +42,22 @@
             </ul>
           </footer>
     {% endblock footer %}
+
+    <script src="{% static 'js/picker.js' %}"></script>
+    <script>
+        console.log('date picker script load');
+
+        new Picker(document.querySelector('.js-full-picker'), {
+          controls: true,
+          format: 'YYYY-MM-DD HH:mm',
+          headers: true,
+        });
+
+        new Picker(document.querySelector('.js-full-picker2'), {
+          controls: true,
+          format: 'YYYY-MM-DD HH:mm',
+          headers: true,
+        });
+    </script>
 </body>
 </html>

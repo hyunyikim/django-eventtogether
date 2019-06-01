@@ -1,59 +1,71 @@
 {% extends "home.html" %}
 {% load staticfiles %}
 <title>{% block title %}이벤트 투게더 :: 상세보기{% endblock title %}</title>
-    {% block navbar %}
-        {{ block.super }}
-    {% endblock navbar %}
-    {% block content %}
-    <div class="container">
-      <div class="row">
+{% block navbar %}
+{{ block.super }}
+{% endblock navbar %}
+{% block content %}
+<div class="container">
+    <div class="row">
         <div class="col-md-12 order-md-1">
-          {{ error_mesage }}
-          <form name="eventForm" action="" method="post" class="needs-validation" novalidate="">
-            {% csrf_token %}
-            <input type="hidden" id="eid" name="eid" value="{{ event.eid }}">
-            <div class="mb-3">
-              <label for="ename">이벤트명</label>
-              <input type="text" class="form-control" name="ename" id="ename" placeholder="이벤트명을 입력해주세요." required="" value="{{ event.ename }}">
-            </div>
-            <div class="mb-3">
-              <label for="econtent">이벤트 설명</label>
-              <input type="text" class="form-control" name="econtent" id="econtent" placeholder="이벤트에 대한 설명을 입력해주세요." required="" value="{{ event.econtent }}">
-            </div>
-            <div class="mb-3">
-              <label for="ecreater">주최자</label>
-              <input type="text" class="form-control" name="ecreater" id="ecreater" placeholder="이벤트의 주최자를 입력해주세요." required="" value="{{ event.ecreater }}">
-            </div>
-            <div class="mb-3">
-              <label for="eloc">주최 장소</label>
-              <input type="text" class="form-control" name="eloc" id="eloc" placeholder="이벤트 주최장소를 입력해주세요." required="" value="{{ event.eloc }}">
-            </div>
-            <div class="mb-3">
-              <label for="eprice">가격</label>
-              <input type="text" class="form-control" name="eprice" id="eprice" placeholder="가격을 입력해주세요." required="" value="{{ event.eprice }}">
-            </div>
-            <div class="mb-3">
-              <label for="emaxattendee">최대참가가능인원</label>
-              <input type="text" class="form-control" name="emaxattendee" id="emaxattendee" placeholder="최대참가가능인원을 입력해주세요." required="" value="{{ event.emaxattendee }}">
-            </div>
-            <hr>
-            <input class="btn btn-primary btn-lg btn-block" type="submit" value="이벤트 만들기">
-          </form>
+            {{ error_mesage }}
+            <form name="eventForm" action="" method="post" class="needs-validation" novalidate="">
+                {% csrf_token %}
+                <input type="hidden" id="eid" name="eid" value="{{ event.eid }}">
+                <div class="mb-3">
+                    <label for="ename">이벤트명</label>
+                    <input type="text" class="form-control" name="ename" id="ename" placeholder="이벤트명을 입력해주세요."
+                           required="" value="{{ event.ename }}">
+                </div>
+                <div class="mb-3">
+                    <label for="econtent">이벤트 설명</label>
+                    <textarea class="form-control" name="econtent" id="econtent"
+                           placeholder="이벤트에 대한 설명을 입력해주세요." required="">{{ event.econtent }}</textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="ecreater">주최자</label>
+                    <input type="text" class="form-control" name="ecreater" id="ecreater"
+                           placeholder="이벤트의 주최자를 입력해주세요." required="" value="{{ event.ecreater }}">
+                </div>
+                <div class="mb-3">
+                    <label for="estartdt">이벤트 시작일</label>
+                    <input type="text" name="estartdt" id="estartdt" class="form-control js-full-picker" value="" placeholder="이벤트 시작일을 입력하세요.">
+                </div>
+                <div class="mb-3">
+                    <label for="eenddt">이벤트 종료일</label>
+                    <input type="text" name="eenddt" id="eenddt" class="form-control js-full-picker2" value="" placeholder="이벤트 종료일을 입력하세요.">
+                </div>
+                <div class="mb-3">
+                    <label for="eloc">주최 장소</label>
+                    <input type="text" class="form-control" name="eloc" id="eloc" placeholder="이벤트 주최장소를 입력해주세요."
+                           required="" value="{{ event.eloc }}">
+                </div>
+                <div class="mb-3">
+                    <label for="eprice">가격</label>
+                    <input type="text" class="form-control" name="eprice" id="eprice" placeholder="가격을 입력해주세요."
+                           required="" value="{{ event.eprice }}">
+                </div>
+                <div class="mb-3">
+                    <label for="emaxattendee">최대참가가능인원</label>
+                    <input type="text" class="form-control" name="emaxattendee" id="emaxattendee"
+                           placeholder="최대참가가능인원을 입력해주세요." required="" value="{{ event.emaxattendee }}">
+                </div>
+                <hr>
+                <input class="btn btn-primary btn-lg btn-block" type="submit" value="이벤트 만들기">
+            </form>
         </div>
-      </div>
     </div>
+</div>
+{% endblock content %}
+<!--
+이벤트 id : {{ event.eid }}<br>
+이벤트명 : {{ event.ename }}<br>
+이벤트주최자 : {{ event.ecreater }}<br>
+-->
+이벤트 id : {{ object.eid }}<br>
+이벤트명 : {{ object.ename }}<br>
+이벤트주최자 : {{ object.ecreater }}<br>
+<a href="/events/">목록으로</a><br>
+<a href="/events/{{ object.eid }}/update/">이벤트 수정하기</a>
+<a href="/events/{{ object.eid }}/delete/">이벤트 삭제하기</a>
 
-    {% endblock content %}
-    <!--
-    이벤트 id : {{ event.eid }}<br>
-    이벤트명 : {{ event.ename }}<br>
-    이벤트주최자 : {{ event.ecreater }}<br>
-    -->
-    이벤트 id : {{ object.eid }}<br>
-    이벤트명 : {{ object.ename }}<br>
-    이벤트주최자 : {{ object.ecreater }}<br>
-    <a href="/events/">목록으로</a><br>
-    <a href="/events/{{ object.eid }}/update/">이벤트 수정하기</a>
-    <a href="/events/{{ object.eid }}/delete/">이벤트 삭제하기</a>
-</body>
-</html>
