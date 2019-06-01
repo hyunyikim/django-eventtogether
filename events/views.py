@@ -53,4 +53,34 @@ class DeleteView(generic.View):
 
 
 class UpdateView(generic.View):
-    print()
+    def get(self, request, *args, **kwargs):
+        print('update get function')
+        eid = self.kwargs.get("pk")
+        try:
+            event = Events.objects.get(eid=eid)
+            return render(request, 'events/write.html', {'event': event})
+
+        except(KeyError, Events.DoesNotExist):
+            return render(request, 'events/detail.html', {
+                'event': event,
+                'error_message': 'update failed'
+            })
+
+    def post(self, request, *args, **kwargs):
+        print('update post function')
+
+        try:
+            event = Events()
+            event.eid = Events.objects.order_by('eid').last().eid + 1
+            event.ename = request.POST['ename']
+            event.econtent = request.POST['econtent']
+            event.ecreater = request.POST['ecreater']
+            event.estartdt = request.POST.get('estartdt')
+            event.eenddt = request.POST.get('eenddt')
+            event.eloc = request.POST['eloc']
+            event.eprice = request.POST['eprice']
+            event.emaxattendee = request.POST['emaxattendee']
+            event.save()
+            return HttpResponseRedirect(reverse('events:detail', args=(event.eid,)))
+        except():
+            return render(request, 'events/write.html', {'error_message': 'update failed'})
