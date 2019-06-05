@@ -3,9 +3,7 @@ from django.shortcuts import render, HttpResponseRedirect, reverse
 from .models import Events
 
 # 클래스형 뷰
-class IndexView(generic.ListView):
-    template_name = 'events/index.html'
-    model = Events
+
 
 
 class DetailView(generic.DetailView):
