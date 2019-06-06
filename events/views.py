@@ -1,9 +1,13 @@
 from django.views import generic
 from django.shortcuts import render, HttpResponseRedirect, reverse
+import os
+from django.conf import settings
 from .models import Events
 
 # 클래스형 뷰
-
+class IndexView(generic.ListView):
+    template_name = 'events/index.html'
+    model = Events
 
 
 class DetailView(generic.DetailView):
@@ -19,6 +23,16 @@ class WriteView(generic.View):
 
     def post(selfs, request, *args, **kwargs):
         try:
+            if 'eimage' in request.FILES:
+                file = request.FILES['eimage']
+                filename = file._name
+                print('파일명 : ', filename)
+
+                fp = open(os.path.join('static/file', filename), 'wb+')
+                for chunk in file.chunks():
+                    fp.write(chunk)
+                fp.close()
+
             event = Events()
             event.eid = Events.objects.order_by('eid').last().eid + 1
             event.ename = request.POST['ename']
@@ -29,8 +43,10 @@ class WriteView(generic.View):
             event.eloc = request.POST['eloc']
             event.eprice = request.POST['eprice']
             event.emaxattendee = request.POST['emaxattendee']
+            event.eimage = filename
             event.save()
             return HttpResponseRedirect(reverse('events:detail', args=(event.eid, )))
+
         except():
             return render(request, 'events/write.html', {'error_message': 'write failed'})
 

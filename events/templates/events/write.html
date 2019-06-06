@@ -9,7 +9,7 @@
     <div class="row">
         <div class="col-md-12 order-md-1">
             {{ error_mesage }}
-            <form name="eventForm" action="" method="post" class="needs-validation" novalidate="">
+            <form name="eventForm" action="" method="post" class="needs-validation" novalidate="" enctype="multipart/form-data">
                 {% csrf_token %}
                 <input type="hidden" id="eid" name="eid" value="{{ event.eid }}">
                 <div class="mb-3">
@@ -49,6 +49,15 @@
                     <label for="emaxattendee">최대참가가능인원</label>
                     <input type="text" class="form-control" name="emaxattendee" id="emaxattendee"
                            placeholder="최대참가가능인원을 입력해주세요." required="" value="{{ event.emaxattendee }}">
+                </div>
+                <div class="input-group mb-3">
+                  <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="inputGroupFile02" name="eimage">
+                    <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Choose file</label>
+                  </div>
+                  <div class="input-group-append">
+                    <span class="input-group-text" id="inputGroupFileAddon02">Upload</span>
+                  </div>
                 </div>
                 <hr>
                 <input class="btn btn-primary btn-lg btn-block" type="submit" value="이벤트 만들기">

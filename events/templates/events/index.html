@@ -23,7 +23,9 @@
                             {% for event in events_list %}
                                 <div class="col-md-4">
                                     <div class="card mb-4 shadow-sm">
-                                        <a href="/events/{{ event.eid }}"><img src="{% static 'img/dog2.jpg' %}" class="bd-placeholder-img card-img-top" width="100%" height="225"></a>
+                                        <a href="/events/{{ event.eid }}">
+                                            <img src="/static/file/{{ event.eimage }}" class="bd-placeholder-img card-img-top" width="100%" height="225">
+                                        </a>
                                         <div class="card-body">
                                             <h4>{{ event.ename }}</h4>
                                             <p class="card-text">{{ event.econtent }}</p>
@@ -42,6 +44,3 @@
     {% endblock content %}
 </body>
 </html>
-
-
-
