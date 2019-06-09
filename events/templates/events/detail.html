@@ -10,27 +10,23 @@
         <div class="col-md-4 order-md-2 mb-4">
             <hr>
             <div>
-                <h5>{{ object.ename }}</h5>
-
-                이벤트에 대한 간편 설명<br>
-
-                일시 : 2017.01.05(월) 15:00 ~ 17:00<br>
-                주최 : {{ object.ecreater }}<br>
-                현재 참여 인원 : {{ object.eculattendee }}명
                 <br>
+                <h3>{{ object.ename }}</h3>
+                <br><br>
+                <h5>일시 : {{ object.estartdt }} ~ {{ object.eenddt }}</h5>
+                <h5>주최자 : {{ object.ecreater }}</h5>
+                <h5>현재 참여 인원 : {{ object.eculattendee }}명</h5>
+                <br><br>
                 <button class="btn btn-primary btn-lg btn-block" type="submit">이벤트 참가하기</button>
             </div>
         </div>
         <div class="col-md-8 order-md-1">
-            <img src="{% static 'img/dog2.jpg' %}" class="event-detail-img">
+            <img src="/static/file/{{ object.eimage }}" class="event-detail-img">
             <hr>
-            {{ object.econtent }}
+            <h5>{{ object.econtent }}</h5>
             <hr>
-            이벤트 id : {{ object.eid }}<br>
-            이벤트명 : {{ object.ename }}<br>
-            이벤트주최자 : {{ object.ecreater }}<br>
             <a href="/events/">목록으로</a><br>
-            <a href="/events/{{ object.eid }}/update/">이벤트 수정하기</a>
+            <a href="/events/{{ object.eid }}/update/">이벤트 수정하기</a><br>
             <a href="/events/{{ object.eid }}/delete/">이벤트 삭제하기</a>
         </div>
       </div>

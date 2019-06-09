@@ -11,6 +11,7 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
+# settings 모듈의 위치를 지정함
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "eventtogether.settings")
 
 application = get_wsgi_application()
